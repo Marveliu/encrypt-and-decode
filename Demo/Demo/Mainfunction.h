@@ -125,10 +125,14 @@ char* Singletablereplaceencrypt(char* targetstring, KeyDictionary keys[])
 		resultstring[i] = keys[index].index;
 	}
 	return &resultstring;
+
+
+
+
 }
 
 //Î¬¼ªÀûÑÇÃÜÂë
 char* Virginiaencrypt(char* targetstring, KeyDictionary keys[])
 {
-
+	//10¡ª¡ª28
 }
