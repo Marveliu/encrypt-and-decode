@@ -13,7 +13,7 @@
 //函数主体
 void main(int argc, char const *argv[])
 {
-	int flag = 0;   //结束菜单循环
+	int flag = 1;   //结束菜单循环
 	int category = 0; //选择程序类型
 
 	char targetstring[STRING_SIZE] = "";
@@ -65,7 +65,6 @@ void main(int argc, char const *argv[])
 				default:
 					break;
 				}
-
 			}
 			else
 			{
@@ -87,30 +86,30 @@ void main(int argc, char const *argv[])
 				switch (category)
 				{
 				case 1:
-					//显示解密结果
-					while (confrim)
-					{
-						strcpy(resultstring, *(Caesardecrypt(targetstring),keys));
-						printf("破解结果：%s/n", &resultstring);
-						printf("继续破解请按1，否则退出\n");
-						scanf("%d", &confrim);
-						if (confrim == 1){
-							confrim = 0;
-						}
-						else
-						{
-							confrim = 1;
-						}
-					}
+					////显示解密结果
+					//while (confrim)
+					//{
+					//	strcpy(resultstring, *(Caesardecrypt(targetstring,keys)));
+					//	printf("破解结果：%s/n", &resultstring);
+					//	printf("继续破解请按1，否则退出\n");
+					//	scanf("%d", &confrim);
+					//	if (confrim == 1){
+					//		confrim = 0;
+					//	}
+					//	else
+					//	{
+					//		confrim = 1;
+					//	}
+					//}
 					break;
 				case 2:
-					strcpy(resultstring, *(Inverteddecrypt(targetstring),keys));
+					//strcpy(resultstring, *(Inverteddecrypt(targetstring, keys)));
 					break;
 				case 3:
-					strcpy(resultstring, *(Singletablereplacedecrypt(targetstring),keys));
+					//strcpy(resultstring, *(Singletablereplacedecrypt(targetstring, keys)));
 					break;
 				case 4:
-					strcpy(resultstring, *(Virginiadecrypt(targetstring),keys));
+					//strcpy(resultstring, *(Virginiadecrypt(targetstring, keys)));
 					break;
 				case 5:
 					break;
@@ -119,6 +118,7 @@ void main(int argc, char const *argv[])
 				}
 
 			}
+			else if (category == 0);
 			else
 			{
 				printf("字符串输入出现问题");
@@ -137,8 +137,6 @@ void main(int argc, char const *argv[])
 			System("cls");
 		}
 	}
-
-
 	return 0;
 }
 

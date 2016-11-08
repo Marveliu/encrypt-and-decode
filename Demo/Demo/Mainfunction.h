@@ -31,9 +31,16 @@ char* Singletablereplacedecrypt(char* targetstring, KeyDictionary keys[]);
 char* Virginiadecrypt(char* targetstring, KeyDictionary keys[]);
 
 
+/*解密*/
+//菜单
+
+void menu();
+void algorithmenu();
+
+
 /*************实现***************/
 
-/*加密*/
+/*************加密***************/
 /*恺撒密码*/
 char* Caesarencrypt(char* targetstring, KeyDictionary keys[])
 {
@@ -125,14 +132,74 @@ char* Singletablereplaceencrypt(char* targetstring, KeyDictionary keys[])
 		resultstring[i] = keys[index].index;
 	}
 	return &resultstring;
-
-
-
-
 }
 
 //维吉利亚密码
 char* Virginiaencrypt(char* targetstring, KeyDictionary keys[])
 {
-	//10——28
+	char keywords[STRING_SIZE];
+	char resultstring[STRING_SIZE] = "";
+	int keywords_len = 0;
+	int putwords_len = 0;
+	int index = 0;
+	int num1 = 0;
+	int num2 = 0;
+
+	//输入加密单词
+	printf("请输入加密单词：\n");
+	scanf("%s", keywords);
+
+	//获得两个字符串的长度
+	keywords_len = strlen(keywords);
+	putwords_len = strlen(targetstring);
+
+	//todo:keywords_len>putwords_len...没有影响，但是多的地方没有输出
+
+	//加密单词
+	for (int i=0,n=0; i < putwords_len; i++)
+	{
+		//取模运算
+		n = i%keywords_len;
+		num1 = keywords[n] - 97;
+		num2 = targetstring[i] - 97;
+		//计算单个字符
+		resultstring[i] = keys[(num1 + num1) % 26].word;
+	}
+}
+
+
+/*************解密***************/
+
+/*恺撒密码*/
+char* Caesardecrypt(char* targetstring, KeyDictionary keys[]);
+/*字母倒排序*/
+char* Inverteddecrypt(char* targetstring, KeyDictionary keys[]);
+//单表置换密码
+char* Singletablereplacedecrypt(char* targetstring, KeyDictionary keys[]);
+//维吉利亚密码
+char* Virginiadecrypt(char* targetstring, KeyDictionary keys[]);
+
+
+
+
+/*功能：输出菜单*/
+void menu(){
+	printf("******************************\n");
+	printf("/t加密解密算法实现\n");
+	printf("1. 加密功能\n");
+	printf("2. 解密功能\n");
+	printf("0. 退出系统\n");
+	printf("******************************\n");
+}
+
+/*功能：选择具体加密解密类型*/
+void algorithmenu(){
+	printf("******************************\n");
+	printf("请选择具体加密解密类型\n");
+	printf("1. 恺撒密码\n");
+	printf("2. 字母倒排序\n");
+	printf("3. 单表置换密码\n");
+	printf("4. 维吉利亚密码\n");
+	printf("5. 转换加密\n");
+	printf("******************************\n");
 }
