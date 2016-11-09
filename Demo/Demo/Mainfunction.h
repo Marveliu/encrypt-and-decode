@@ -11,27 +11,34 @@
 
 
 /*加密*/
-/*恺撒密码*/
+/*恺撒加密*/
 char* Caesarencrypt(char* targetstring, KeyDictionary keys[]);
-/*字母倒排序*/
+/*字母倒排序加密*/
 char* Invertedencrypt(char* targetstring, KeyDictionary keys[]);
-//单表置换密码
+//单表置换加密
 char* Singletablereplaceencrypt(char* targetstring, KeyDictionary keys[]);
-//维吉利亚密码
+//维吉利亚加密
 char* Virginiaencrypt(char* targetstring, KeyDictionary keys[]);
+//转换加密
+char* Convertencrypt(char* targetstring, KeyDictionary keys[]);
 
 /*解密*/
-/*恺撒密码*/
+/*恺撒解密*/
 char* Caesardecrypt(char* targetstring, KeyDictionary keys[]);
-/*字母倒排序*/
+/*字母倒排序解密*/
 char* Inverteddecrypt(char* targetstring, KeyDictionary keys[]);
-//单表置换密码
+//单表置换解密
 char* Singletablereplacedecrypt(char* targetstring, KeyDictionary keys[]);
-//维吉利亚密码
+//维吉利亚解密
 char* Virginiadecrypt(char* targetstring, KeyDictionary keys[]);
-
+//转换解密
+char* Convertdecrypt(char* targetstring, KeyDictionary keys[]);
 
 /*解密*/
+
+
+
+
 //菜单
 
 void menu();
@@ -69,7 +76,6 @@ char* Caesarencrypt(char* targetstring, KeyDictionary keys[])
 	}
 	return &resultstring;
 }
-
 /*字母倒排序*/
 char* Invertedencrypt(char* targetstring, KeyDictionary keys[])
 {
@@ -93,7 +99,6 @@ char* Invertedencrypt(char* targetstring, KeyDictionary keys[])
 	}
 	return &resultstring;
 }
-
 //单表置换密码
 char* Singletablereplaceencrypt(char* targetstring, KeyDictionary keys[])
 {
@@ -133,7 +138,6 @@ char* Singletablereplaceencrypt(char* targetstring, KeyDictionary keys[])
 	}
 	return &resultstring;
 }
-
 //维吉利亚密码
 char* Virginiaencrypt(char* targetstring, KeyDictionary keys[])
 {
@@ -166,22 +170,42 @@ char* Virginiaencrypt(char* targetstring, KeyDictionary keys[])
 		resultstring[i] = keys[(num1 + num1) % 26].word;
 	}
 }
+//转换加密
+char* Convertencrypt(char* targetstring, KeyDictionary keys[])
+{
+
+}
 
 
 /*************解密***************/
 
 /*恺撒密码*/
-char* Caesardecrypt(char* targetstring, KeyDictionary keys[]);
+char* Caesardecrypt(char* targetstring, KeyDictionary keys[])
+{
+
+}
 /*字母倒排序*/
-char* Inverteddecrypt(char* targetstring, KeyDictionary keys[]);
+char* Inverteddecrypt(char* targetstring, KeyDictionary keys[])
+{
+
+}
 //单表置换密码
-char* Singletablereplacedecrypt(char* targetstring, KeyDictionary keys[]);
+char* Singletablereplacedecrypt(char* targetstring, KeyDictionary keys[])
+{
+
+}
 //维吉利亚密码
-char* Virginiadecrypt(char* targetstring, KeyDictionary keys[]);
+char* Virginiadecrypt(char* targetstring, KeyDictionary keys[]) {
 
 
+}
+//转换解密
+char* Convertdecrypt(char* targetstring, KeyDictionary keys[]) {
+
+}
 
 
+/*************功能***************/
 /*功能：输出菜单*/
 void menu(){
 	printf("******************************\n");
@@ -196,10 +220,10 @@ void menu(){
 void algorithmenu(){
 	printf("******************************\n");
 	printf("请选择具体加密解密类型\n");
-	printf("1. 恺撒密码\n");
-	printf("2. 字母倒排序\n");
-	printf("3. 单表置换密码\n");
-	printf("4. 维吉利亚密码\n");
-	printf("5. 转换加密\n");
+	printf("1. 恺撒加密解密\n");
+	printf("2. 字母倒排序加密解密\n");
+	printf("3. 单表置换加密解密\n");
+	printf("4. 维吉利亚加密解密\n");
+	printf("5. 转换加密解密\n");
 	printf("******************************\n");
 }
