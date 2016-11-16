@@ -34,5 +34,7 @@ typedef struct keydictionary
 	int index;
 }KeyDictionary;
 
+//{(a,97)-(z,122)}
+
 
 
