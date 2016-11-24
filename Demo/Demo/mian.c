@@ -96,16 +96,30 @@ void main(int argc, char const *argv[])
 					printf("继续破解请按1，否则退出\n");
 					scanf("%d", &confrim);
 					if (confrim == 1){
-						confrim = 0;
+						confrim = 1;
 					}
 					else
 					{
-						confrim = 1;
+						confrim = 0;
 					}
 				}
 				break;
 			case 2:
-				strcpy(resultstring, Inverteddecrypt(targetstring, keys));
+				//显示解密结果
+				while (confrim)
+				{
+					strcpy(resultstring, Inverteddecrypt(targetstring, keys));
+					printf("破解结果：%s\n", &resultstring);
+					printf("继续破解请按1，否则退出\n");
+					scanf("%d", &confrim);
+					if (confrim == 1){
+						confrim = 1;
+					}
+					else
+					{
+						confrim = 0;
+					}
+				}
 				break;
 			case 3:
 				strcpy(resultstring, Singletablereplacedecrypt(targetstring, keys));

@@ -10,7 +10,7 @@
 #include<stdlib.h>
 #include<string.h>
 #define MAXSIZE 50
-#define STRING_SIZE 2048
+#define STRING_SIZE 128
 #define NEWSTRINGLIST (StringList *)malloc(sizeof(StringList))
 #define NEWSTRING (String *)malloc(sizeof(String))
 

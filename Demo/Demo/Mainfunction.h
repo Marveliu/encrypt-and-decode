@@ -49,7 +49,7 @@ KeyDictionary* convertkeys(KeyDictionary keys[]);
 /*************实现***************/
 
 /*************加密***************/
-/*恺撒密码*/
+/*1. 恺撒密码*/
 char* Caesarencrypt(char* targetstring, KeyDictionary keys[])
 {
 	int m = 0;
@@ -77,63 +77,72 @@ char* Caesarencrypt(char* targetstring, KeyDictionary keys[])
 	}
 	return resultstring;
 }
-/*字母倒排序*/
+
+/*2. 字母倒排序*/
 char* Invertedencrypt(char* targetstring, KeyDictionary keys[])
 {
 	int i = 0;
-	int length = sizeof(targetstring);
+	int length = strlen(targetstring);
 	char resultstring[STRING_SIZE] = "";
 
 	//更新密钥表
 	for (int i = 0; i < 26; i++)
 	{
-		keys[i].index = keys[25 - i].index;
+		//前面的值已经发生了改变
+		keys[i].index = 219 - keys[i].index;
+		printf("%c:::%d\n", keys[i].word, keys[i].index);
 	}
 
 	//按照密钥表赋值
-	for (int i = 0; i <= length; i++)
+	for (int i = 0; i < length; i++)
 	{
-		//这个地方我想建立一个ｈａｓｈ表
 		int index = (int)*(targetstring + i) - 97;  //加快计算速度
 		//todo:单个字符在赋值不知道这样对不对
 		resultstring[i] = keys[index].index;
 	}
 	return resultstring;
 }
+
 //单表置换密码
 char* Singletablereplaceencrypt(char* targetstring, KeyDictionary keys[])
 {
 	int n = 0;
 	int index = 0;
-	int length = sizeof(targetstring);
-
+	int length = strlen(targetstring);
 	char resultstring[STRING_SIZE] = "";
 	char keystring[STRING_SIZE] = "";
 	int check[25] = { 0 };  //全部设置为0
 
 
 	printf("请输入key\n");  //字符数的限制,
-	scanf("%c", keystring);
+	scanf("%s", keystring);
 
 	strcat(keystring, "abcdefghijiklmnopqrstuvwxyz");
 
+	int length1 = strlen(keystring);
 	//更新keys[]
-	for (int i = 0; i < strlen(keystring); i++)
+	for (int i = 0; i < length1; i++)
 	{
 		int index = keystring[i] - 97;
-		if (check[i] == 0)
+		if (check[index] == 0)
 		{
 			//字母没有出现
-			check[i] = 1;
-			keys[n++].index = index;
+			check[index] = 1;
+			keys[n++].index = keystring[i];
 		}
 	}
 
+	//输出keys
+	for (int i = 0; i < 26; i++)
+	{
+		printf("%c:::%d\n", keys[i].word, keys[i].index);
+	}
+
 	//按照密钥表赋值
-	for (int i = 0; i <= length; i++)
+	for (int i = 0; i <length; i++)
 	{
 		//这个地方我想建立一个ｈａｓｈ表
-		int index = (int)*(targetstring + i) - 97;  //加快计算速度
+		int index = targetstring[i]- 97;  //加快计算速度
 		//todo:单个字符在赋值不知道这样对不对
 		resultstring[i] = keys[index].index;
 	}
@@ -254,7 +263,7 @@ char* Convertencrypt(char* targetstring)
 
 /*************解密***************/
 
-/*恺撒密码*/
+/*1.2 恺撒密码*/
 char* Caesardecrypt(char* targetstring, KeyDictionary keys[])
 {
 	int m = 0;
@@ -268,7 +277,7 @@ char* Caesardecrypt(char* targetstring, KeyDictionary keys[])
 	//更新密钥表
 	for (int i = 0; i < 26; i++)
 	{
-		keys[i].index = (keys[i].index + m)>122 ? (96 + keys[i].index + m - 122) : (keys[i].index + m);
+		keys[i].index = 122 - i;
 		printf("%c:::%d\n", keys[i].word, keys[i].index);
 	}
 
@@ -282,31 +291,31 @@ char* Caesardecrypt(char* targetstring, KeyDictionary keys[])
 	return resultstring;
 }
 
-
-/*字母倒排序*/
+/*2.2 字母倒排序*/
 //和加密的函数一样
 char* Inverteddecrypt(char* targetstring, KeyDictionary keys[])
 {
 	int i = 0;
-	int length = sizeof(targetstring);
+	int length = strlen(targetstring);
 	char resultstring[STRING_SIZE] = "";
 
 	//密钥表
 	for (int i = 0; i < 26; i++)
 	{
-		keys[i].index = keys[25 - i].index;
+		keys[i].index = 122 - i;
+		printf("%c:::%d\n", keys[i].word, keys[i].index);
 	}
 
 	//按照密钥表赋值
-	for (int i = 0; i <= length; i++)
+	for (int i = 0; i < length; i++)
 	{
-		//这个地方我想建立一个ｈａｓｈ表
 		int index = (int)*(targetstring + i) - 97;  //加快计算速度
 		//todo:单个字符在赋值不知道这样对不对
 		resultstring[i] = keys[index].index;
 	}
 	return resultstring;
 }
+
 //单表置换密码
 char* Singletablereplacedecrypt(char* targetstring, KeyDictionary keys[])
 {
@@ -320,24 +329,30 @@ char* Singletablereplacedecrypt(char* targetstring, KeyDictionary keys[])
 
 
 	printf("请输入key\n");  //字符数的限制,
-	scanf("%c", keystring);
+
+	getch();
+	scanf("%s", keystring);
 
 	strcat(keystring, "abcdefghijiklmnopqrstuvwxyz");
 
-	//获得密钥表
-	for (int i = 0; i < strlen(keystring); i++)
+	int length1 = strlen(keystring);
+	//更新keys[]
+	for (int i = 0; i < length1; i++)
 	{
 		int index = keystring[i] - 97;
-		if (check[i] == 0)
+		if (check[index] == 0)
 		{
 			//字母没有出现
-			check[i] = 1;
-			keys[n++].index = index;
+			check[index] = 1;
+			keys[n++].index = keystring[i];
 		}
 	}
-
 	keys = convertkeys(keys);
-
+	//输出keys
+	for (int i = 0; i < 26; i++)
+	{
+		printf("%c:::%d\n", keys[i].word, keys[i].index);
+	}
 	//按照密钥表赋值
 	for (int i = 0; i <= length; i++)
 	{
@@ -496,11 +511,24 @@ void algorithmenu(){
 /*功能：转换密码表*/
 KeyDictionary* convertkeys(KeyDictionary keys[])
 {
-	KeyDictionary result[25];
+	KeyDictionary result[26];
+	int temp;
+	int index;
+
+	//反转
 	for (int i = 0; i < 26; i++)
 	{
-		result[i].word = keys[i].index;
-		result[i].index = keys[i].word;
+		temp = keys[i].index;
+		keys[i].index = keys[i].word;
+		keys[i].word = temp;
+	}
+
+	//排序
+	for (int i = 0; i < 26; i++)
+	{
+		index = keys[i].word - 97;
+		result[index].word = keys[i].word;
+		result[index].index = keys[i].index;
 	}
 
 	return result;
