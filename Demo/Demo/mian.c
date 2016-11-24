@@ -62,6 +62,7 @@ void main(int argc, char const *argv[])
 				strcpy(resultstring, Virginiaencrypt(targetstring, keys));
 				break;
 			case 5:
+				strcpy(resultstring, Convertencrypt(targetstring, keys));
 				break;
 			default:
 				break;
@@ -122,12 +123,52 @@ void main(int argc, char const *argv[])
 				}
 				break;
 			case 3:
-				strcpy(resultstring, Singletablereplacedecrypt(targetstring, keys));
+				while (confrim)
+				{
+					strcpy(resultstring, Singletablereplacedecrypt(targetstring, keys));
+					printf("破解结果：%s\n", &resultstring);
+					printf("继续破解请按1，否则退出\n");
+					scanf("%d", &confrim);
+					if (confrim == 1){
+						confrim = 1;
+					}
+					else
+					{
+						confrim = 0;
+					}
+				}
 				break;
 			case 4:
-				strcpy(resultstring, Virginiadecrypt(targetstring, keys));
+				while (confrim)
+				{
+					strcpy(resultstring, Virginiadecrypt(targetstring, keys));
+					printf("破解结果：%s\n", &resultstring);
+					printf("继续破解请按1，否则退出\n");
+					scanf("%d", &confrim);
+					if (confrim == 1){
+						confrim = 1;
+					}
+					else
+					{
+						confrim = 0;
+					}
+				}
 				break;
 			case 5:
+				while (confrim)
+				{
+					strcpy(resultstring, Convertdecrypt(targetstring, keys));
+					printf("破解结果：%s\n", &resultstring);
+					printf("继续破解请按1，否则退出\n");
+					scanf("%d", &confrim);
+					if (confrim == 1){
+						confrim = 1;
+					}
+					else
+					{
+						confrim = 0;
+					}
+				}
 				break;
 			default:
 				break;
